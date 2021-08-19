@@ -1,6 +1,12 @@
 import React from 'react';
 
-const Questionaire = ( { data: {question, correct_answer, incorrect_answers }}) => (
+const Button = ({ answer }) => (
+    <button className="bg-white p-4 text-purple-800 font-semibold rounded shadow mb-4">
+    {answer}
+    </button>
+);
+
+const Questionaire = ({ data: {question, correct_answer, incorrect_answers }}) => (
     <div>
         <div className="bg-white text-purple-800 p-10
     rounded shadow-md">
@@ -10,10 +16,10 @@ const Questionaire = ( { data: {question, correct_answer, incorrect_answers }}) 
     </h2>
     </div>
     <div className="grid grid-cols-2 gap-6 mt-6">
-        <button className="bg-white p-4 text-purple-800 font-semibold rounded shadow mb-4">{correct_answer}</button>
-        <button className="bg-white p-4 text-purple-800 font-semibold rounded shadow mb-4">{incorrect_answers[0]}</button>
-        <button className="bg-white p-4 text-purple-800 font-semibold rounded shadow">{incorrect_answers[1]}</button>
-        <button className="bg-white p-4 text-purple-800 font-semibold rounded shadow">{incorrect_answers[2]}</button>
+        <Button answer={correct_answer} />
+        <Button answer={incorrect_answers[0]} />
+        <Button answer={incorrect_answers[1]} />
+        <Button answer={incorrect_answers[2]} />
     </div>
     </div>
 )
