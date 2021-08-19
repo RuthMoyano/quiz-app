@@ -6,7 +6,10 @@ const Button = ({ answer }) => (
     </button>
 );
 
-const Questionaire = ({ data: {question, correct_answer, incorrect_answers }}) => (
+const Questionaire = ({handleAnswer, data: {question, correct_answer, incorrect_answers }}) => {
+    const shuffledAnswer = [correct_answer, ...
+    incorrect_answers];
+    return (
     <div>
         <div className="bg-white text-purple-800 p-10
     rounded shadow-md">
@@ -16,12 +19,14 @@ const Questionaire = ({ data: {question, correct_answer, incorrect_answers }}) =
     </h2>
     </div>
     <div className="grid grid-cols-2 gap-6 mt-6">
-        <Button answer={correct_answer} />
-        <Button answer={incorrect_answers[0]} />
-        <Button answer={incorrect_answers[1]} />
-        <Button answer={incorrect_answers[2]} />
+        <Button onCLick={() => handleAnswer(shuffledAnswer[0])} answer={shuffledAnswer[0]} />
+        <Button onCLick={() => handleAnswer(shuffledAnswer[1])} answer={shuffledAnswer[1]} />
+        <Button onCLick={() => handleAnswer(shuffledAnswer[2])} answer={shuffledAnswer[2]} />
+        <Button onCLick={() => handleAnswer(shuffledAnswer[3])} answer={shuffledAnswer[3]} />
     </div>
     </div>
-)
+    )
+}
+
 
 export default Questionaire;
