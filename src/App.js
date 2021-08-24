@@ -10,7 +10,6 @@ function App () {
   const [currentIndex, setCurrentIndex] = 
   useState(0);
   const [score, setScore] = useState(0);
-  const [gameEnded, setGameEnded] = useState(false);
 
   useEffect(() => {
     fetch(API_URL)
@@ -30,12 +29,7 @@ function App () {
     setScore(score + 1);
   }
 
-  if(newIndex>= questions.length) {
-    setGameEnded(true);
-  }
-  };
-
-  return gameEnded ? (
+  return currentIndex >=questions.length ? (
     <h1 className='text-3xl text-white font-bold'>Your final score: {score}</h1>
   ) : questions.length > 0 ? (
     <div className="container">
