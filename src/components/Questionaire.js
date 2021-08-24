@@ -3,6 +3,7 @@ import React from 'react';
 const Questionaire = ({
     showAnswers,
     handleAnswer, 
+    handleNextQuestion,
     data: { question, correct_answer, 
     incorrect_answers },
 }) => {
@@ -26,21 +27,31 @@ const Questionaire = ({
             ? answer === correct_answer
                 ? 'bg-green-500'
                 : 'bg-red-500'
-            : 'bg-white';
+            : 'text-purple-700';
 
             //const textColor = showAnswers ?
             //'text-white' : 'text-purple-800'
             return (    
             <button
-                className={`${bgColor} ${textColor}
+                className={`bg white
                 p-4 font-semibold
                 rounded shadow`}
-                onclick={() => handleAnswer
+                onClick={() => handleAnswer
                 (answer)}
                 dangerouslySetInnerHTML= {{ __html: answer}}
                 />
                 );
+                })}
             </div>
+            {showAnswers && (
+                <button
+                onClick={handleNextQuestion}
+                className={`ml-auto bg-purple-700
+                text-white p-4 font-semibold rounded
+                shadow`}>
+                    Next Question
+                </button>
+            )}
         </div>
     );
 };
