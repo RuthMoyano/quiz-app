@@ -7,8 +7,7 @@ const API_URL =
 
 function App () {
   const [questions, setQuestions] = useState([]);
-  const [currentIndex, setCurrentIndex] = 
-  useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [score, setScore] = useState(0);
   const [showAnswers, setShowAnswers] = useState(false);
 
@@ -16,8 +15,16 @@ function App () {
     fetch(API_URL)
       .then((res) => res.json())
       .then((data) => {
+        const questions = data.results.map((question) =>
+        ({
+          ...question,
+          answers: [
+            question.correct_answer,
+            ...question.incorrect_answers,
+          ].sort(() => Math.random() - 0.5),
+        }));
+
         setQuestions(data.results);
-        setCurrentQuestions(data.results[0])
       });
   }, []);
 
@@ -26,22 +33,31 @@ function App () {
   if (!showAnswers) {
     //prevent double answers
 
-  if (answer === questions[currentIndex].currentIndex) {
+  if (answer === questions[currentIndex].correct_answer) {
     setScore(score + 1);
   }
 }
 
-setShowAnswers(true);
+  setShowAnswers(true);
+};
 
-  return questions.length ? (
+  const handleNextQuestion = () => {
+    setCurrentIndex(currentIndex + 1);
+
+    setShowAnswers(false);   
+  }
+
+  return questions.length > 0 ? (
     <div className="container">
-      {currentQuestion >= questions.length ? (
+      {currentIndex >= questions.length ? (
         <h1 className='text-3xl text-white font-bold'>
           Your final score: {score}
           </h1>
       ) : (
       <Questionaire 
       data={questions[currentIndex]} 
+      showAnswers={showAnswers}
+      handleNextQuestion={handleNextQuestion}
       handleAnswer={handleAnswer} 
       />
       )}
@@ -50,6 +66,5 @@ setShowAnswers(true);
     <h2 className="text-2xl text-white font-bold">Loading...</h2>
   );
 }
-
 
 export default App;
