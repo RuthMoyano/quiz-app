@@ -33,9 +33,9 @@ const Questionaire = ({
             //'text-white' : 'text-purple-800'
             return (    
             <button
-                className={`bg white
+                className='bg-white
                 p-4 font-semibold
-                rounded shadow`}
+                rounded shadow'
                 onClick={() => handleAnswer
                 (answer)}
                 dangerouslySetInnerHTML= {{ __html: answer}}
